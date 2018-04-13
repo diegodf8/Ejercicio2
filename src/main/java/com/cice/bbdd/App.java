@@ -1,9 +1,6 @@
 package com.cice.bbdd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class App
 {
@@ -14,9 +11,16 @@ public class App
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:8889/diego","root","root");
             Statement statement = connection.createStatement();
             //String sql ="CREATE TABLE prueba (id INT NOT NULL AUTO_INCREMENT, nombre VARCHAR(30) NOT NULL, PRIMARY KEY (id))";
-            String sql ="INSERT INTO prueba (nombre) VALUES('Test6')";
-            //String sql = "SELECT * FROM test";
-            statement.executeUpdate(sql);
+            String sql1="INSERT INTO prueba (nombre) VALUES('Test9')";
+            String sql2 = "SELECT * FROM prueba";
+            statement.executeUpdate(sql1);
+            ResultSet resultado = statement.executeQuery(sql2);
+            resultado.first();
+            String id = resultado.getString("id");
+            String nombre = resultado.getString("nombre");
+            System.out.println( id + " " + nombre);
+
+
             // Cerrar recursos
             connection.close();
         } catch (ClassNotFoundException e) {
